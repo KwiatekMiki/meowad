@@ -2,8 +2,11 @@
     "manifest_version": 3,
     "name": "meowad",
     "description": ":3",
-    "version": "3.1.0",
+    "version": "3.0.0",
     "permissions": [],
+    "icons": {
+        "128": "icon.png"
+    },
     "content_scripts": [
         {
             "js": ["main.js"],
@@ -13,8 +16,9 @@
         }
     ],
     "browser_specific_settings": {
+        "ignore this error, this is required for the extension": "to be published on the firefox add-on store",
         "gecko": {
-            "id": "meowad@iwontreadyouremails.kwiatekmiki.com"
+            "id": "meowad@iwontreadyouremails.kwiatekmiki.pl"
         }
     }
 }
