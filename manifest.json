@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "meowad",
-    "description": ":3",
+    "description": "Replaces all ads on Twitter with an ad from \":3\" that's just filled with meowing and :3",
     "version": "3.1.0",
     "permissions": [],
     "icons": {
