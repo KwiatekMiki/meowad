@@ -18,10 +18,16 @@ meoww mrrow :3 purrrrr meow :3 meow mrow meowww mrrrow :3`,
     }
 }
 
+// ONLY LOWERCASE HANDLES
+const ignoredAdvertisers = [
+    "chiitan7407", "chiitan_osaka", "kyushu_chiitan", "chiitanmomiji",
+    "dhiitannagoya", "thailandchiitan"
+]
 
 function getAds() {
     const ads = [];
     document.querySelectorAll("article[data-testid=tweet]:not(.meowified)").forEach((tweet) => {
+        // ads.push(tweet); return;
         const span = tweet.querySelector("div.r-1kkk96v span.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3");
         if (span && span.innerText === "Ad") {
             ads.push(tweet);
@@ -43,6 +49,8 @@ function replaceAds() {
         const profile = tweet.querySelector("[data-testid=User-Name]");
         const displayname = profile.querySelector("a:not([tabindex='-1']) span");
         const handle = profile.querySelector("a[tabindex='-1'] span");
+        const handleText = handle.innerText.toLowerCase().replace("@", "");
+        if (ignoredAdvertisers.includes(handleText)) { return }
 
         tweet.querySelectorAll("div:has(> img)").forEach((imagediv) => {
             const image = imagediv.querySelector("div[style*=twimg]:not([style*=profile_images])");
