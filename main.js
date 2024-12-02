@@ -52,11 +52,16 @@ function replaceAds() {
         const handleText = handle.innerText.toLowerCase().replace("@", "");
         if (ignoredAdvertisers.includes(handleText)) { return }
 
-        tweet.querySelectorAll("div:has(> img)").forEach((imagediv) => {
-            const image = imagediv.querySelector("div[style*=twimg]:not([style*=profile_images])");
+        tweet.querySelectorAll("div:has(> img)").forEach((imageContainer) => {
+            const imageDiv = imageContainer.querySelector("div[style*=twimg]:not([style*=profile_images])");
+            if (imageDiv) {
+                imageDiv.style.backgroundImage = `url(${ad.image})`;
+                imageDiv.style.backgroundSize = "100% 100%";
+            }
+
+            const image = imageContainer.querySelector("div[style*=twimg]:not([style*=profile_images])");
             if (image) {
-                image.style.backgroundImage = `url(${ad.image})`;
-                image.style.backgroundSize = "100% 100%";
+                image.setAttribute("src", ad.image);
             }
         })
 
