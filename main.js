@@ -1,5 +1,23 @@
-const profilePicture = "https://lh3.googleusercontent.com/uKLDTLmDr98dhxSjpNa3X4BuLLcPRLncbY9KCvPodXuIg4-Hj0hYfZWcRc29td0Aksm1EoQgHqYA3lf8wlzvugXnAs0"
-const imageLink = "https://pbs.twimg.com/media/GMLPkawXcAAvWiQ?format=jpg&name=small"
+const advertiser = {
+    displayName: ":3",
+    handle: "@twitter",
+    profilePicture: "https://lh3.googleusercontent.com/uKLDTLmDr98dhxSjpNa3X4BuLLcPRLncbY9KCvPodXuIg4-Hj0hYfZWcRc29td0Aksm1EoQgHqYA3lf8wlzvugXnAs0",
+}
+
+const ad = {
+    content: `meow meow mrrow meow mprrr :3 mrow meow :3 mrowww mrrrow :3
+
+mrow meow purrrrr :3 mrow meow mrrrow mrowwww meow meow mrrrrrr mrowww mrow meow purrrrr :3 mrow meow purrrrr meow purrrrr meow
+
+meoww mrrow :3 purrrrr meow :3 meow mrow meowww mrrrow :3`,
+    image: "https://pbs.twimg.com/media/GMLPkawXcAAvWiQ?format=jpg&name=small",
+    videoPoster: "https://pbs.twimg.com/media/GMLPkawXcAAvWiQ?format=jpg&name=small",
+    card: {
+        from: "twitter.com",
+        text: ":3"
+    }
+}
+
 
 function getAds() {
     const ads = [];
@@ -29,43 +47,36 @@ function replaceAds() {
         tweet.querySelectorAll("div:has(> img)").forEach((imagediv) => {
             const image = imagediv.querySelector("div[style*=twimg]:not([style*=profile_images])");
             if (image) {
-                image.style.backgroundImage = `url(${imageLink})`;
+                image.style.backgroundImage = `url(${ad.image})`;
                 image.style.backgroundSize = "100% 100%";
             }
         })
 
-        tweet.querySelectorAll(":has(> video > source)").forEach((videocontainer) => {
-            const video = videocontainer.querySelector("video");
-            video.setAttribute("poster", imageLink);
+        tweet.querySelectorAll(":has(> video > source)").forEach((videoContainer) => {
+            const video = videoContainer.querySelector("video");
+            video.setAttribute("poster", ad.videoPoster);
             document.querySelectorAll("source").forEach((source) => {
                 source.removeAttribute("src");
             });
 
-            const videocontainerHTML = videocontainer.innerHTML;
-            videocontainer.innerHTML = "";
-            videocontainer.innerHTML = videocontainerHTML;
+            const _videocontainer = videoContainer.innerHTML;
+            videoContainer.innerHTML = "";
+            videoContainer.innerHTML = _videocontainer;
         })
 
-        if (pfp) { pfp.style.backgroundImage = `url(${profilePicture})`; }
-        if (displayname) { displayname.innerText = ":3"; }
-        if (handle) { handle.innerText = "@twitter"; }
-
-        if (tweetText) {
-            tweetText.innerText = `meow meow mrrow meow mprrr :3 mrow meow :3 mrowww mrrrow :3
-
-mrow meow purrrrr :3 mrow meow mrrrow mrowwww meow meow mrrrrrr mrowww mrow meow purrrrr :3 mrow meow purrrrr meow purrrrr meow
-
-meoww mrrow :3 purrrrr meow :3 meow mrow meowww mrrrow :3`;
-        }
+        if (pfp) { pfp.style.backgroundImage = `url(${advertiser.profilePicture})` }
+        if (displayname) { displayname.innerText = advertiser.displayName }
+        if (handle) { handle.innerText = advertiser.handle }
+        if (tweetText) { tweetText.innerText = ad.content }
 
         if (cardcontainer && card) {
             const cardlink = cardcontainer.querySelector("a[dir=ltr]");
             if (cardlink) {
-                cardlink.innerText = "From twitter.com";
+                cardlink.innerText = `From ${ad.card.from}`;
             }
 
             card.querySelectorAll("div[dir=ltr] > span").forEach((cardTitle) => {
-                cardTitle.innerHTML = ":3";
+                cardTitle.innerHTML = ad.card.text;
             });
         }
     })
