@@ -92,6 +92,10 @@ function replaceAds() {
                 cardTitle.innerHTML = ad.card.text;
             });
         }
+
+        tweet.querySelectorAll("div:has(button[data-testid=like]) button").forEach((button) => {
+            button.disabled = true;
+        })
     })
 }
 
